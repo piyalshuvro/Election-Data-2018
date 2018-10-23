@@ -31,6 +31,7 @@ zillaParishadSelect = Select(driver.find_element_by_name('ctl00$ContentPlaceHold
 zillaParishadOption = zillaParishadSelect.options
 
 for zillaParishadValue in range(1, len(zillaParishadOption)):
+for zillaParishadValue in range(12, len(zillaParishadOption)):
     zillaParishadSelect = Select(driver.find_element_by_name('ctl00$ContentPlaceHolder1$cmbZillaParisadName'))
     zillaParishadOption = zillaParishadSelect.options
 
@@ -44,6 +45,7 @@ for zillaParishadValue in range(1, len(zillaParishadOption)):
 
 
     for panchayatSamityValue in range(1, len(panchayatSamityOption)):
+    for panchayatSamityValue in range(11, len(panchayatSamityOption)):
         panchayatSamitySelect = Select(driver.find_element_by_name('ctl00$ContentPlaceHolder1$cmbPanchayatSamity'))
 
         panchayatSamitySelect.select_by_index(panchayatSamityValue)
@@ -82,6 +84,7 @@ for zillaParishadValue in range(1, len(zillaParishadOption)):
 
             for rows in table:
                 with open("data_%s.xls" % x, 'w') as myfile:
+                with open("C:\Monash RA Work\Election 2018\Temp Data\data_%s.xls" % x, 'w') as myfile:
                     myfile.write(str(rows))
 
 
@@ -89,6 +92,8 @@ for zillaParishadValue in range(1, len(zillaParishadOption)):
             name = zillaParishadName + "_" + panchayatSamityName +"_" + gpName
             for i, df in enumerate(pd.read_html("data_%s.xls" % x)):
                 df.to_csv("%s.csv" % name, index=False, encoding='utf-8')
+            for i, df in enumerate(pd.read_html("C:\Monash RA Work\Election 2018\Temp Data\data_%s.xls" % x)):
+                df.to_csv("C:\Monash RA Work\Election 2018\Final Data\%s.csv" % name, index=False, encoding='utf-8')
 
             x=x+1
             time.sleep(2)
